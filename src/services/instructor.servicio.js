@@ -23,19 +23,19 @@ instructorService.actualizarInstructor = async (id, datosParaActualizar) => {
 };
 
 instructorService.eliminarInstructor = async (id) => {
-  const instructor = await instructorService.obtenerPorId(id);
-  if (!instructor) throw new Error('Instructor no encontrado');
+    const instructor = await instructorService.obtenerPorId(id);
+    if (!instructor) throw new Error('Instructor no encontrado');
 
-  const cursosPublicados = await Curso.count({
-    where: { instructorId: id, estaPublicado: true },
-  });
+    const cursosPublicados = await Curso.count({ // Aquí se cuenta si hay cursos publicados
+        where: { instructorId: id, estaPublicado: true },
+    });
 
-  if (cursosPublicados > 0) {
-    throw new Error('No se puede eliminar un instructor que aún tiene cursos publicados.');
-  }
+    if (cursosPublicados > 0) { // Si hay cursos publicados, se lanza el error
+        throw new Error('No se puede eliminar un instructor que aún tiene cursos publicados.');
+    }
 
-  await instructor.destroy();
-  return { mensaje: 'Instructor eliminado correctamente' };
+    await instructor.destroy();
+    return { mensaje: 'Instructor eliminado correctamente' };
 };
 
 module.exports = instructorService;

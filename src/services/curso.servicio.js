@@ -29,23 +29,23 @@ cursoService.eliminarCurso = async (id) => {
 
 // Lógica de negocio
 cursoService.agregarModulo = async (cursoId, datosDelModulo) => {
-  const curso = await Curso.findByPk(cursoId);
-  if (!curso) throw new Error('El curso especificado no existe.');
-  if (curso.estaPublicado) throw new Error('No se pueden añadir módulos a un curso que ya está publicado.');
-  return Modulo.create({ ...datosDelModulo, cursoId: cursoId });
+    const curso = await Curso.findByPk(cursoId);
+    if (!curso) throw new Error('El curso especificado no existe.');
+    if (curso.estaPublicado) throw new Error('No se pueden añadir módulos a un curso que ya está publicado.'); // Aquí la validación
+    return Modulo.create({ ...datosDelModulo, cursoId: cursoId });
 };
 cursoService.agregarLeccion = async (moduloId, datosDeLaLeccion) => {
-  const modulo = await Modulo.findByPk(moduloId, { include: [Curso] });
-  if (!modulo) throw new Error('El módulo especificado no existe.');
-  if (modulo.Curso.estaPublicado) throw new Error('No se pueden añadir lecciones a un curso que ya está publicado.');
-  return Leccion.create({ ...datosDeLaLeccion, moduloId: moduloId });
+    const modulo = await Modulo.findByPk(moduloId, { include: [Curso] }); // Se incluye el Curso para acceder a estaPublicado
+    if (!modulo) throw new Error('El módulo especificado no existe.');
+    if (modulo.Curso.estaPublicado) throw new Error('No se pueden añadir lecciones a un curso que ya está publicado.'); // Aquí la validación
+    return Leccion.create({ ...datosDeLaLeccion, moduloId: moduloId });
 };
 cursoService.publicarCurso = async (cursoId) => {
-  const curso = await Curso.findByPk(cursoId);
-  if (!curso) throw new Error('El curso especificado no existe.');
-  curso.estaPublicado = true;
-  await curso.save();
-  return curso;
+    const curso = await Curso.findByPk(cursoId);
+    if (!curso) throw new Error('El curso especificado no existe.');
+    curso.estaPublicado = true; // Se marca como publicado
+    await curso.save();
+    return curso;
 };
 
 module.exports = cursoService;

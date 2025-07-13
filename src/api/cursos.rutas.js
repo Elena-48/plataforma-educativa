@@ -12,6 +12,21 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// ... justo después del bloque de router.get('/', ...)
+
+// RUTA PARA OBTENER UN CURSO ESPECÍFICO POR SU ID
+router.get('/:id', async (req, res) => {
+  try {
+    const curso = await cursoService.obtenerCursoPorId(req.params.id);
+    if (!curso) {
+      // Si el servicio no devuelve nada, enviamos un 404
+      return res.status(404).json({ error: 'Curso no encontrado' });
+    }
+    res.status(200).json(curso);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 router.post('/', async (req, res) => {
   try {

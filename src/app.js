@@ -2,8 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 const db = require('./models');
-const instructorRoutes = require('./api/instructor.routes.js');
-const cursoRoutes = require('./api/curso.routes.js');
+const instructorRoutes = require('./api/instructor.rutas.js');
+const cursoRoutes = require('./api/curso.rutas.js');
 require('dotenv').config();
 
 const app = express();

@@ -2,19 +2,27 @@
   "name": "plataforma_educativa",
   "version": "1.0.0",
   "main": "index.js",
- "scripts": {
+"scripts": {
   "start": "npx nodemon src/app.js",
   "test": "echo \"Error: no test specified\" && exit 1"
 },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elena-48/plataforma-educativa.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elena-48/plataforma-educativa/issues"
+  },
+  "homepage": "https://github.com/Elena-48/plataforma-educativa#readme",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
-    "mysql2": "^3.14.2",
+    "pg": "^8.16.3",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {

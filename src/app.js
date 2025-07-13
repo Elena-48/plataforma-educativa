@@ -1,29 +1,27 @@
 // src/app.js
 const express = require('express');
-const sequelize = require('./config/database');
+const cors = require('cors');
 const db = require('./models');
+const instructorRoutes = require('./api/instructor.routes.js');
+const cursoRoutes = require('./api/curso.routes.js');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Importamos las rutas de instructores
-const instructorRoutes = require('./api/instructor.rutas');
-const cursoRoutes = require('./api/cursos.rutas'); // Correcto
-
-// Middleware para que Express pueda entender JSON
+// --- Middlewares ---
+app.use(cors());
 app.use(express.json());
 
-// Le decimos a la app que use nuestras rutas
+// --- Rutas ---
 app.use('/api/instructors', instructorRoutes);
-app.use('/api/cursos', cursoRoutes); // <-- LÍNEA CORREGIDA AQUÍ
+app.use('/api/cursos', cursoRoutes);
 
-// --- Por ahora, la ruta principal ---
 app.get('/', (req, res) => {
-  res.send('¡El servidor está vivo y funcionando!');
+  res.send('¡El servidor de la plataforma educativa está funcionando!');
 });
 
-// Función para iniciar el servidor
+// --- Iniciar Servidor ---
 async function startServer() {
   try {
     await db.sequelize.sync({ alter: true });

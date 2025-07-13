@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./models');
 const instructorRoutes = require('./api/instructor.rutas.js');
-const cursoRoutes = require('./api/curso.rutas.js');
+const cursoRoutes = require('./api/cursos.rutas.js');
 require('dotenv').config();
 
 const app = express();

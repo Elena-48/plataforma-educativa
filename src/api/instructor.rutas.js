@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const instructorService = require('../services/instructor.servicio');
-
+module.exports = router;
 // Ruta para obtener todos los instructores
 router.get('/', async (req, res) => {
   try {

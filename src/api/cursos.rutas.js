@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-// ... justo después del bloque de router.get('/', ...)
 
 // RUTA PARA OBTENER UN CURSO ESPECÍFICO POR SU ID
 router.get('/:id', async (req, res) => {

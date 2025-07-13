@@ -22,6 +22,10 @@ instructorService.actualizarInstructor = async (id, datosParaActualizar) => {
   return instructor;
 };
 
+instructorService.obtenerPorId = async (id) => {
+  return Instructor.findByPk(id); // <--- Esta es la función que busca el instructor
+}; 
+
 instructorService.eliminarInstructor = async (id) => {
     const instructor = await instructorService.obtenerPorId(id);
     if (!instructor) throw new Error('Instructor no encontrado');

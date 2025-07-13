@@ -3,14 +3,19 @@ const express = require('express');
 const router = express.Router();
 const instructorService = require('../services/instructor.servicio');
 
-router.get('/', async (req, res) => {
+// ...
+router.get('/:id', async (req, res) => { // <--- Esta es la ruta que no te funciona por ID
   try {
-    const instructores = await instructorService.obtenerTodos();
-    res.status(200).json(instructores);
+    const instructor = await instructorService.obtenerPorId(req.params.id);
+    if (!instructor) {
+      return res.status(404).json({ error: 'Instructor no encontrado' });
+    }
+    res.status(200).json(instructor);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+// ...
 
 router.post('/', async (req, res) => {
   try {

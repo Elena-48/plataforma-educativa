@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const instructorService = require('../services/instructor.servicio');
 
-// ...
 router.get('/:id', async (req, res) => { // <--- Esta es la ruta que no te funciona por ID
   try {
     const instructor = await instructorService.obtenerPorId(req.params.id);
@@ -15,7 +14,6 @@ router.get('/:id', async (req, res) => { // <--- Esta es la ruta que no te funci
     res.status(500).json({ error: error.message });
   }
 });
-// ...
 
 router.post('/', async (req, res) => {
   try {

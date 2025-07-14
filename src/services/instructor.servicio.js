@@ -46,9 +46,9 @@ instructorService.actualizarInstructor = async (id, datosParaActualizar) => {
 
 instructorService.eliminarInstructor = async (id) => {
   try {
-    const instructor = await instructorService.obtenerPorId(id);
+    const instructor = await instructorService.obtenerPorId(id); // Obtiene el instructor una sola vez
     if (!instructor) {
-      throw new Error('Instructor no encontrado');
+      throw new Error('Instructor no encontrado'); // Lanza error si no lo encuentra
     }
 
     // --- Parte CRÍTICA: Verificar cursos publicados ---
@@ -57,25 +57,26 @@ instructorService.eliminarInstructor = async (id) => {
         instructorId: id,
         estaPublicado: true
       }
-      // Si quieres ver la consulta SQL exacta en los logs de Render, descomenta la línea de abajo:
+      // Puedes descomentar la siguiente línea para ver la consulta SQL en los logs de Render
       // , logging: console.log
     });
 
     console.log(`Instructor ID ${id} tiene ${cursosPublicadosAsociados} cursos publicados.`); // Log para depuración
 
-    if (cursosPublicadosAsociados > 0) {
+    if (cursosPublicadosAsociados > 0) { // Si el conteo es mayor que 0, no permite la eliminación
       throw new Error('No se puede eliminar un instructor que aún tiene cursos publicados.');
     }
     // ----------------------------------------------------
 
+    // Si no hay cursos publicados, procede a eliminar el instructor
     await instructor.destroy();
     return { mensaje: 'Instructor eliminado correctamente' };
   } catch (error) {
-    // Si el error es uno de nuestros errores personalizados, lo relanzamos para que la ruta lo maneje
+    // Si el error es uno de nuestros errores personalizados, lo relanzamos
     if (error.message === 'Instructor no encontrado' || error.message === 'No se puede eliminar un instructor que aún tiene cursos publicados.') {
       throw error;
     }
-    // Si es otro tipo de error (ej. de base de datos), lo loggeamos y lanzamos un error genérico 500
+    // Para cualquier otro error inesperado
     console.error(`Error inesperado en eliminarInstructor para ID ${id}:`, error);
     throw new Error('Error interno del servidor al intentar eliminar el instructor.');
   }

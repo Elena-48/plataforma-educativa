@@ -1,4 +1,3 @@
-// src/api/instructor.routes.js
 const express = require('express');
 const router = express.Router();
 const instructorService = require('../services/instructor.servicio');

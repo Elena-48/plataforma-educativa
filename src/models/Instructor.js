@@ -1,4 +1,3 @@
-// src/models/Instructor.js
 module.exports = (sequelize, DataTypes) => {
   const Instructor = sequelize.define('Instructor', {
     nombre: {

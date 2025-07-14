@@ -1,4 +1,3 @@
-// src/models/Modulo.js
 module.exports = (sequelize, DataTypes) => {
   const Modulo = sequelize.define('Modulo', {
     titulo: {

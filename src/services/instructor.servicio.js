@@ -1,6 +1,4 @@
-// src/services/instructor.servicio.js
-const { Instructor, Curso } = require('../models'); // Asegúrate que ambos modelos estén importados
-
+const { Instructor, Curso } = require('../models'); 
 const instructorService = {};
 
 instructorService.crearInstructor = async (datosDelInstructor) => {
@@ -44,8 +42,6 @@ instructorService.actualizarInstructor = async (id, datosParaActualizar) => {
   }
 };
 
-// Este es SOLO el fragmento de la función eliminarInstructor.
-// Asegúrate de que el resto del archivo instructor.servicio.js esté como te lo di previamente.
 
 instructorService.eliminarInstructor = async (id) => {
   try {
@@ -62,8 +58,7 @@ instructorService.eliminarInstructor = async (id) => {
         instructorId: id, // El ID del instructor que queremos eliminar
         estaPublicado: true // La condición de que el curso esté publicado
       }
-      // Puedes descomentar la siguiente línea para ver la consulta SQL en los logs de Render
-      // , logging: console.log
+
     });
 
     // Este log es crucial para la depuración en Render
@@ -73,7 +68,7 @@ instructorService.eliminarInstructor = async (id) => {
     if (cursosPublicadosAsociados > 0) {
       throw new Error('No se puede eliminar un instructor que aún tiene cursos publicados.'); // Lanza el error de regla de negocio
     }
-    // ----------------------------------------------------
+  
 
     // Si no tiene cursos publicados, procede con la eliminación del instructor
     await instructor.destroy();
@@ -83,7 +78,7 @@ instructorService.eliminarInstructor = async (id) => {
     if (error.message === 'Instructor no encontrado' || error.message === 'No se puede eliminar un instructor que aún tiene cursos publicados.') {
       throw error;
     }
-    // Si es otro tipo de error (ej. de base de datos), lo loggeamos y lanzamos un error genérico 500
+    // Si es otro tipo de error como de base de datos, lo loggeamos y se lanza un error genérico 500
     console.error(`Error inesperado en eliminarInstructor para ID ${id}:`, error);
     throw new Error('Error interno del servidor al intentar eliminar el instructor.');
   }

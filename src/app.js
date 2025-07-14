@@ -1,9 +1,8 @@
-// src/app.js
 const express = require('express');
 const cors = require('cors');
 const db = require('./models');
-const instructorRoutes = require('./api/instructor.rutas.js'); // VERIFICA ESTA RUTA DE ARCHIVO
-const cursoRoutes = require('./api/cursos.rutas.js'); // VERIFICA ESTA RUTA DE ARCHIVO
+const instructorRoutes = require('./api/instructor.rutas.js');
+const cursoRoutes = require('./api/cursos.rutas.js'); 
 require('dotenv').config();
 
 const app = express();
@@ -14,12 +13,12 @@ app.use(cors());
 app.use(express.json());
 
 // --- Rutas ---
-app.get('/', (req, res) => { // Asegúrate que esta ruta base general esté aquí
+app.get('/', (req, res) => { 
   res.send('¡El servidor de la plataforma educativa está funcionando!');
 });
 
-app.use('/api/instructors', instructorRoutes); // <--- ¡ESTA LÍNEA ES CRÍTICA PARA INSTRUCTORES!
-app.use('/api/cursos', cursoRoutes); // <--- ESTA LÍNEA ES CRÍTICA PARA CURSOS
+app.use('/api/instructors', instructorRoutes); // <--- ¡ESTA LÍNEA ES IMPORTANTE PARA INSTRUCTORES!
+app.use('/api/cursos', cursoRoutes); // <--- ESTA LÍNEA ES IMPORTANTE PARA CURSOS
 
 
 // --- Iniciar Servidor ---

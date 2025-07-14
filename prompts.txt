@@ -1,0 +1,44 @@
+Herramienta: Gemini
+Fecha: 2025-07-10
+Prompt: ¿Cómo puedo organizar por fases el desarrollo de una API que gestione cursos, módulos y lecciones?  
+Justificación: Requería una guía para estructurar mi plan de trabajo y no generar todo de golpe, ya que necesito documentar mi proceso y mantener control del desarrollo paso a paso.  
+
+Herramienta: Gemini
+Fecha: 2025-07-10  
+Prompt: ¿Cómo puedo crear la estructura base de un proyecto con Node.js, Express, Sequelize y PostgreSQL?  
+Justificación: Necesitaba preparar el entorno inicial y definir carpetas y archivos esenciales para comenzar el desarrollo de mi API.  
+
+Herramienta: Gemini
+Fecha: 2025-07-10
+Prompt: ¿Cómo puedo crear un CRUD para la entidad Instructor en un proyecto con Express y Sequelize?  
+Justificación: Buscaba implementar la gestión de instructores como primer paso funcional de la plataforma, siguiendo buenas prácticas y usando Sequelize, necesitaba guiarme en lo que debia usar, igual quieria probar en Js :v
+
+Herramienta: Gemini
+Fecha: 2025-07-10
+Prompt: ¿Cómo puedo crear un modelo de cursos con un campo isPublished y evitar cambios después de publicar?  
+Justificación: El curso tenia reglas de negocio que impiden modificarlo una vez publicado, y necesitaba asegurarme de reflejar eso en el código.  
+
+Herramienta: Gemini
+Fecha: 2025-07-10
+Prompt: ¿Cómo puedo implementar módulos y lecciones con validación para evitar cambios en cursos publicados?  
+Justificación: Tenía que asegurarme de que una vez que el curso esté publicado, no se puedan agregar módulos ni lecciones, respetando una regla crítica del sistema.  
+
+Herramienta: Gemini 
+Fecha: 2025-07-10
+Prompt: ¿Cómo implemento la validación para que no se pueda eliminar un instructor con cursos publicados?  
+Justificación: Para cumplir la regla de negocio que impide eliminar instructores con cursos publicados, necesitaba saber cómo hacer esa validación en el controlador.  
+
+Herramienta: Gemini
+Fecha: 2025-07-12
+Prompt: Me puedes proporcionar una guia para desplegar mi api  
+Justificación: Necesitaba una guia ya que la primera forma que intente me salio mal, es por eso que le pedi una guia
+
+Herramienta: Gemini  
+Fecha: 2025-07-13 
+Prompt: Puedes analizar el codigo y decirme si hay algun error
+Justificación: Necesitaba guiarme porque la hacer las pruebas en postman una vez desplegada me arrojaba error no me cargaba la base de datos y hay como diez mil intentos de ejecucion, (era sintaxis :v)
+
+Herramienta: Gemini
+Fecha: 2025-07-14
+Prompt: Me podrias decir como puedo poblar mi base de datos en DBeaver  
+Justificación: No me guiaba de como hacerlo, lo intente con los scrips de MySQL pero arrojaba error, y me desespere  

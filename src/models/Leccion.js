@@ -1,4 +1,3 @@
-// src/models/Leccion.js
 module.exports = (sequelize, DataTypes) => {
   const Leccion = sequelize.define('Leccion', {
     titulo: {

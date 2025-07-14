@@ -1,4 +1,3 @@
-// src/services/curso.servicio.js
 const { Curso, Modulo, Leccion, Instructor } = require('../models');
 
 const cursoService = {};

@@ -3,35 +3,71 @@ const { Instructor, Curso } = require('../models'); // Asegúrate que ambos mode
 
 const instructorService = {};
 
-// ... (otras funciones del servicio instructorService) ...
+instructorService.crearInstructor = async (datosDelInstructor) => {
+  try {
+    return await Instructor.create(datosDelInstructor);
+  } catch (error) {
+    console.error('Error en servicio crearInstructor:', error);
+    throw error;
+  }
+};
+
+instructorService.obtenerTodos = async () => {
+  try {
+    return await Instructor.findAll();
+  } catch (error) {
+    console.error('Error en servicio obtenerTodos:', error);
+    throw error;
+  }
+};
+
+instructorService.obtenerPorId = async (id) => {
+  try {
+    return await Instructor.findByPk(id);
+  } catch (error) {
+    console.error(`Error en servicio obtenerPorId para ID ${id}:`, error);
+    throw error;
+  }
+};
+
+instructorService.actualizarInstructor = async (id, datosParaActualizar) => {
+  try {
+    const instructor = await instructorService.obtenerPorId(id);
+    if (!instructor) {
+      throw new Error('Instructor no encontrado');
+    }
+    await instructor.update(datosParaActualizar);
+    return instructor;
+  } catch (error) {
+    console.error(`Error en servicio actualizarInstructor para ID ${id}:`, error);
+    throw error;
+  }
+};
 
 instructorService.eliminarInstructor = async (id) => {
   try {
-    const instructor = await instructorService.obtenerPorId(id); // Primero, verifica si el instructor existe
+    const instructor = await instructorService.obtenerPorId(id);
     if (!instructor) {
-      throw new Error('Instructor no encontrado'); // Si no existe, lanza un error 404
+      throw new Error('Instructor no encontrado');
     }
 
     // --- Parte CRÍTICA: Verificar cursos publicados ---
-    // Contamos cuántos cursos tiene este instructor que están marcados como 'publicados'
     const cursosPublicadosAsociados = await Curso.count({
       where: {
-        instructorId: id, // El ID del instructor que queremos eliminar
-        estaPublicado: true // La condición de que el curso esté publicado
-      },
-      // Puedes añadir un console.log aquí temporalmente para depurar
-      // logging: console.log // Esto mostrará la consulta SQL que se ejecuta en los logs de Render
+        instructorId: id,
+        estaPublicado: true
+      }
+      // Si quieres ver la consulta SQL exacta en los logs de Render, descomenta la línea de abajo:
+      // , logging: console.log
     });
 
     console.log(`Instructor ID ${id} tiene ${cursosPublicadosAsociados} cursos publicados.`); // Log para depuración
 
-    // Si el conteo es mayor que 0, significa que tiene cursos públicos y no se puede eliminar
     if (cursosPublicadosAsociados > 0) {
-      throw new Error('No se puede eliminar un instructor que aún tiene cursos publicados.'); // Lanza el error de regla de negocio
+      throw new Error('No se puede eliminar un instructor que aún tiene cursos publicados.');
     }
     // ----------------------------------------------------
 
-    // Si no tiene cursos publicados, procede con la eliminación del instructor
     await instructor.destroy();
     return { mensaje: 'Instructor eliminado correctamente' };
   } catch (error) {
